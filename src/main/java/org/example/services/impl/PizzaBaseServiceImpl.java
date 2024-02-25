@@ -124,14 +124,18 @@ public class PizzaBaseServiceImpl implements PizzaBaseService {
 
     @Override
     public void save() {
-        // todo: rewrite code
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(getFileName()))) {
+        try (BufferedWriter baseIngredientsWriter = new BufferedWriter(new FileWriter(ValueConstants.DB_DIR + ValueConstants.PIZZA_BASE_INGREDIENTS_FILE));
+             BufferedWriter pizzaBaseWriter = new BufferedWriter(new FileWriter(ValueConstants.DB_DIR + ValueConstants.PIZZA_BASE_FILE));
+             BufferedWriter baseDoughsWriter = new BufferedWriter(new FileWriter(ValueConstants.DB_DIR + ValueConstants.PIZZA_BASE_DOUGH_FILE));
+             BufferedWriter baseSizesWriter = new BufferedWriter(new FileWriter(ValueConstants.DB_DIR + ValueConstants.PIZZA_BASE_SIZE_FILE));
+             BufferedWriter extraIngredientsWriter = new BufferedWriter(new FileWriter(ValueConstants.DB_DIR + ValueConstants.PIZZA_BASE_EXTRA_INGREDIENTS_FILE));
+        ) {
             for (var i : this.pizzaBases) {
-                writer.write(i.fileToString());
-                secondarySave(i.getId(), i.getBaseIngredients().stream().map(j -> (Entity) j).toList(), ValueConstants.DB_DIR + ValueConstants.PIZZA_BASE_INGREDIENTS_FILE);
-                secondarySave(i.getId(), i.getPizzaDoughs().stream().map(j -> (Entity) j).toList(), ValueConstants.DB_DIR + ValueConstants.PIZZA_BASE_DOUGH_FILE);
-                secondarySave(i.getId(), i.getPizzaSizes().stream().map(j -> (Entity) j).toList(), ValueConstants.DB_DIR + ValueConstants.PIZZA_BASE_SIZE_FILE);
-                secondarySave(i.getId(), i.getExtraIngredients().stream().map(j -> (Entity) j).toList(), ValueConstants.DB_DIR + ValueConstants.PIZZA_BASE_EXTRA_INGREDIENTS_FILE);
+                pizzaBaseWriter.write(i.fileToString());
+                secondarySave(i.getId(), i.getBaseIngredients().stream().map(j -> (Entity) j).toList(), baseIngredientsWriter);
+                secondarySave(i.getId(), i.getPizzaDoughs().stream().map(j -> (Entity) j).toList(), baseDoughsWriter);
+                secondarySave(i.getId(), i.getPizzaSizes().stream().map(j -> (Entity) j).toList(), baseSizesWriter);
+                secondarySave(i.getId(), i.getExtraIngredients().stream().map(j -> (Entity) j).toList(), extraIngredientsWriter);
             }
         } catch (Exception ex) {
             System.out.println("Save error: " + ex.getMessage());
@@ -139,13 +143,9 @@ public class PizzaBaseServiceImpl implements PizzaBaseService {
 
     }
 
-    private void secondarySave(Long pizzaBaseId, List<Entity> entities, String filename) {
-        try (var writerToIngredientsFile = new BufferedWriter(new FileWriter(filename))) {
-            for (var ingredient : entities) {
-                writerToIngredientsFile.write(String.format("%s|%s%n", pizzaBaseId, ingredient.getId()));
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    private void secondarySave(Long pizzaBaseId, List<Entity> entities, BufferedWriter writer) throws IOException {
+        for (var ingredient : entities) {
+            writer.write(String.format("%s|%s%n", pizzaBaseId, ingredient.getId()));
         }
     }
 

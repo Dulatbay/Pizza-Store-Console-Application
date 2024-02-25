@@ -1,1 +1,2 @@
-1|thin|200.0
+1|traditional|400.0
+2|thin|300.0
