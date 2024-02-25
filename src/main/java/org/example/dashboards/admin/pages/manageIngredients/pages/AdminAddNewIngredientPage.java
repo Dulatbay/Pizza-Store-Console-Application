@@ -34,8 +34,8 @@ public class AdminAddNewIngredientPage implements Page {
                 break;
             }
 
-            if (line.contains("[") || line.contains("]")) {
-                System.out.println("Write without [] symbols!!!");
+            if (line.contains("|")) {
+                System.out.println("Write without | symbols!!!");
                 continue;
             }
             if (line.isBlank()) {

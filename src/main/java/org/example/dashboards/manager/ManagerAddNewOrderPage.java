@@ -89,8 +89,8 @@ public class ManagerAddNewOrderPage implements Page {
                         return;
                     }
 
-                    if (line.contains("[") || line.contains("]")) {
-                        System.out.println("Write without [] symbols!!!");
+                    if (line.contains("|")) {
+                        System.out.println("Write without | symbols!!!");
                         continue;
                     }
                     if (line.isBlank()) {
@@ -166,8 +166,8 @@ public class ManagerAddNewOrderPage implements Page {
                 return;
             }
 
-            if (line.contains("[") || line.contains("]")) {
-                System.out.println("Write without [] symbols!!!");
+            if (line.contains("|")) {
+                System.out.println("Write without | symbols!!!");
                 continue;
             }
             if (line.isBlank()) {
@@ -186,8 +186,8 @@ public class ManagerAddNewOrderPage implements Page {
                 return;
             }
 
-            if (line.contains("[") || line.contains("]")) {
-                System.out.println("Write without [] symbols!!!");
+            if (line.contains("|")) {
+                System.out.println("Write without | symbols!!!");
                 continue;
             }
             if (line.isBlank()) {

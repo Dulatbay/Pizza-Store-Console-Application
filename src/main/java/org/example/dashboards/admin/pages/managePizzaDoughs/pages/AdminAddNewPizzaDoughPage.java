@@ -35,7 +35,7 @@ public class AdminAddNewPizzaDoughPage implements Page {
                 break;
             }
 
-            if (line.contains("[") || line.contains("]")) {
+            if (line.contains("|")) {
                 System.out.println("Write without [] symbols!!!");
                 continue;
             }
@@ -64,7 +64,7 @@ public class AdminAddNewPizzaDoughPage implements Page {
                 break;
             }
 
-            if (line.contains("[") || line.contains("]")) {
+            if (line.contains("|")) {
                 System.out.println("Write without [] symbols!!!");
                 continue;
             }
