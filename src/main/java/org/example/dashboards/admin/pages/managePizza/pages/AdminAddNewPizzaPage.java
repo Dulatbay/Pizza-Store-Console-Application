@@ -202,6 +202,8 @@ public class AdminAddNewPizzaPage implements Page {
             new ViewAllIngredientsPage().printAsTable(exceptAdded);
             System.out.print("Please select extra ingredients by id separated by space: ");
             var line = InputUtils.getScanner().nextLine();
+            if(line.isBlank() || line.isEmpty())
+                break;
             var words = Arrays.stream(line.split(" ")).map(String::trim).collect(Collectors.toSet());
             if (words.isEmpty()) {
                 break;

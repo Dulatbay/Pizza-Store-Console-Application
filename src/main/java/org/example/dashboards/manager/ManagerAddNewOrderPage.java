@@ -263,6 +263,8 @@ public class ManagerAddNewOrderPage implements Page {
                     isExit = true;
                     return;
                 }
+                if(line.isBlank() || line.isEmpty())
+                    return;
                 for (var idLine : line.split(" ")) {
                     var id = Long.valueOf(idLine);
                     var pizzaIngredient = pizzaIngredientService.getById(id);
