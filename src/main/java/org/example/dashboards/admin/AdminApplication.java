@@ -13,6 +13,8 @@ import java.util.List;
 
 import static org.example.constants.ValueConstants.getValidNumber;
 
+//
+
 public class AdminApplication implements Application {
     private boolean isRunning;
     private final String password = "qit";
@@ -68,8 +70,4 @@ public class AdminApplication implements Application {
     }
 
 
-    @Override
-    public void end() {
-
-    }
 }

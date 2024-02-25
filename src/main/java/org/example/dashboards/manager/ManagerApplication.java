@@ -44,8 +44,4 @@ public class ManagerApplication implements Application {
         System.out.println(pageNumber + ") Exit");
     }
 
-    @Override
-    public void end() {
-
-    }
 }

@@ -42,16 +42,17 @@ public class ManagerViewOrderDetailPage implements Page {
 
     public void printOrdersAsTable(List<PizzaOrder> orders) {
         String horizontalLine = "+------+-----------------+-------------+--------------+----------------+-----------------+\n";
-        System.out.print(horizontalLine);
-        System.out.printf("| %-4s | %-15s | %-11s | %-12s | %-14s | %-15s |\n", "ID", "Pizza", "Total Price", "Size", "Dough", "Note");
-        System.out.print(horizontalLine);
         for (PizzaOrder order : orders) {
+            System.out.println("Added pizza:");
+            System.out.print(horizontalLine);
+            System.out.printf("| %-4s | %-15s | %-11s | %-12s | %-14s | %-15s |\n", "ID", "Pizza", "Total Price", "Size", "Dough", "Note");
+            System.out.print(horizontalLine);
             System.out.printf("| %-4d | %-15s | %-11.2f | %-12s | %-14s |  %-15s |\n",
                     order.getId(), order.getPizzaBase().getName(), order.getTotalPrice(),
                     order.getSelectedPizzaSize().getDescription(), order.getSelectedPizzaDough().getDescription(),
                     order.getNote());
             System.out.print(horizontalLine);
-            System.out.println("Added ingredients: ");
+            System.out.println("Added ingredients to pizza: ");
             new ViewAllIngredientsPage().printAsTable(order.getAddedIngredients());
         }
     }
