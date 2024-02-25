@@ -40,7 +40,7 @@ public class PizzaDashboard {
     }
 
     private static String getRoleSelectorMenu() {
-        return "1) Enter as admin\n2) Enter as manager\n3) Exit";
+        return "\nMady by QIT\nhttps://t.me/channel_qanly\n1) Enter as admin\n2) Enter as manager\n3) Exit";
     }
 
     public static void main(String[] args) {
