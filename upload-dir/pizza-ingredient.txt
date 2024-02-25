@@ -1,0 +1,5 @@
+2|cheese|600.0
+3|tomato 2|500.0
+4|cheese 2|700.0
+5|tomato|200.0
+6|tomato 3|700.0
