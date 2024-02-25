@@ -122,23 +122,21 @@ public class PizzaOrderServiceImpl implements PizzaOrderService {
 
     @Override
     public void save() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(getFileName()));) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(getFileName()));
+             BufferedWriter ingWriter = new BufferedWriter(new FileWriter(ValueConstants.DB_DIR + ValueConstants.PIZZA_ORDER_ADDED_INGREDIENTS_FILE))
+        ) {
             for (var i : this.pizzaOrders) {
                 writer.write(i.fileToString());
-                secondarySave(i.getId(), i.getAddedIngredients().stream().map(j -> (Entity) j).toList());
+                secondarySave(i.getId(), i.getAddedIngredients().stream().map(j -> (Entity) j).toList(), ingWriter);
             }
         } catch (Exception ex) {
             System.out.println("Save error: " + ex.getMessage());
         }
     }
 
-    private void secondarySave(Long pizzaOrderId, List<Entity> entities) {
-        try (var writerToIngredientsFile = new BufferedWriter(new FileWriter(ValueConstants.DB_DIR + ValueConstants.PIZZA_ORDER_ADDED_INGREDIENTS_FILE))) {
-            for (var entity : entities) {
-                writerToIngredientsFile.write(String.format("%s|%s%n", pizzaOrderId, entity.getId()));
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    private void secondarySave(Long pizzaOrderId, List<Entity> entities, BufferedWriter writer) throws IOException {
+        for (var entity : entities) {
+            writer.write(String.format("%s|%s%n", pizzaOrderId, entity.getId()));
         }
     }
 }
