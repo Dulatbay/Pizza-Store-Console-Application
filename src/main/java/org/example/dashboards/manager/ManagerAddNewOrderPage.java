@@ -101,7 +101,8 @@ public class ManagerAddNewOrderPage implements Page {
                     break;
                 }
 
-                var sumOfAllIng = pizzaOrder.getAddedIngredients().stream().mapToDouble(PizzaIngredient::getPrice).sum();
+                var sumOfAllIng = pizzaOrder.getAddedIngredients().stream().mapToDouble(PizzaIngredient::getPrice).sum()
+                        + pizzaOrder.getPizzaBase().getBaseIngredients().stream().mapToDouble(PizzaIngredient::getPrice).sum();
 
                 pizzaOrder.setTotalPrice(
                         pizzaBase.getBasePrice()
@@ -263,7 +264,7 @@ public class ManagerAddNewOrderPage implements Page {
                     isExit = true;
                     return;
                 }
-                if(line.isBlank() || line.isEmpty())
+                if (line.isBlank() || line.isEmpty())
                     return;
                 for (var idLine : line.split(" ")) {
                     var id = Long.valueOf(idLine);
