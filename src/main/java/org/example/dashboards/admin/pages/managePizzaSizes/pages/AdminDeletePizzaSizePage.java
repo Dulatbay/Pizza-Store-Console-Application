@@ -40,8 +40,8 @@ public class AdminDeletePizzaSizePage implements Page {
             System.out.println("Deleted");
         } catch (EntityNotFoundException entityNotFoundException) {
             System.out.println("Entity doesn't exist");
-        } catch (Exception e) {
-            System.out.println("Some error occurred: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Enter a valid number!!");
         }
     }
 }
